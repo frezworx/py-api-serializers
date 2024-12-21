@@ -43,11 +43,15 @@ class MovieRetrieveSerializer(MovieSerializer):
 
 
 class MovieSessionSerializer(serializers.ModelSerializer):
-    cinema_hall_name = serializers.CharField(source="cinema_hall.name")
+    cinema_hall_name = serializers.CharField(read_only=True, source="cinema_hall.name")
     cinema_hall_capacity = serializers.IntegerField(
+        read_only=True,
         source="cinema_hall.capacity"
     )
-    movie_title = serializers.CharField(source="movie.title")
+    movie_title = serializers.CharField(read_only=True, source="movie.title")
+    movie = serializers.PrimaryKeyRelatedField(queryset=Movie.objects.all())
+    cinema_hall = serializers.PrimaryKeyRelatedField(
+        queryset=CinemaHall.objects.all())
 
     class Meta:
         model = MovieSession
@@ -56,7 +60,9 @@ class MovieSessionSerializer(serializers.ModelSerializer):
             "show_time",
             "movie_title",
             "cinema_hall_name",
-            "cinema_hall_capacity"
+            "cinema_hall_capacity",
+            "cinema_hall",
+            "movie",
         )
 
 

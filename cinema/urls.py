@@ -16,12 +16,12 @@ router.register("actors", viewset=ActorViewSet, basename="actors")
 router.register("movies", viewset=MovieViewSet, basename="movies")
 
 router.register(
-    "movie-sessions",
+    "movie_sessions",
     viewset=MovieSessionViewSet,
-    basename="movie-sessions"
+
 )
 router.register(
-    "cinema-halls",
+    "cinema_halls",
     viewset=CinemaHallsViewSet,
     basename="cinema-halls"
 )
